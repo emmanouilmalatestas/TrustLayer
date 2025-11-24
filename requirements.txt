@@ -7,3 +7,5 @@ fastapi
 uvicorn
 pytest
 loguru
+pytest-cov
+coverage
