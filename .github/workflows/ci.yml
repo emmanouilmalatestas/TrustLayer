@@ -15,7 +15,7 @@ jobs:
         image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: TrustLayer2025!
+          POSTGRES_PASSWORD: 2511ma!
           POSTGRES_DB: trustlayer_test
         ports:
           - 5432:5432
@@ -39,21 +39,22 @@ jobs:
           pip install -r requirements.txt
           pip install pytest psycopg2 pytest-cov coverage
 
-      - name: Restore database from dump
-        run: |
-          pg_restore --no-owner --no-privileges --clean --if-exists \
-            --host=127.0.0.1 --port=5432 --username=postgres \
-            --dbname=trustlayer_test backups/trustlayer_auto.dump
-        env:
-          PGPASSWORD: TrustLayer2025!
+     - name: Seed database
+  run: |
+    psql -h 127.0.0.1 -U postgres -d trustlayer_test -f seed.sql
+  env:
+    PGPASSWORD: 2511ma!
 
       - name: Run tests with coverage
         run: pytest --cov=backend --cov-report=xml --cov-report=term
         env:
           PGHOST: 127.0.0.1
           PGUSER: postgres
-          PGPASSWORD: TrustLayer2025!
+          PGPASSWORD: 2511ma!
           PGDATABASE: trustlayer_test
+
+      - name: Lint with pylint
+        run: pylint backend || true
 
       - name: Generate coverage badge
         uses: tj-actions/coverage-badge-py@v2
@@ -65,5 +66,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add coverage-badge.svg
-          git commit -m "Update coverage badge"
+          git commit -m "Update coverage badge" || echo "No changes to commit"
           git push
