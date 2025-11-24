@@ -1,0 +1,1 @@
+![CI](https://github.com/emmanouil/TrustLayer/actions/workflows/ci.yml/badge.svg)
