@@ -54,14 +54,6 @@ jobs:
           PGPASSWORD: 2511ma!
           PGDATABASE: trustlayer_test
 
-      - name: Lint with pylint
-        run: pylint backend || true
-
-      - name: Generate coverage badge
-        uses: tj-actions/coverage-badge-py@v2
-        with:
-          output: coverage-badge.svg
-
            - name: Commit badge
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
