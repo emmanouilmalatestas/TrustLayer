@@ -35,9 +35,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest psycopg2 pytest-cov coverage pylint
+  run: |
+    pip install -r requirements.txt
+    pip install pytest psycopg2 pytest-cov coverage pylint
 
       - name: Seed database
         run: |
