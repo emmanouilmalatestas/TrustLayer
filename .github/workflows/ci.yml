@@ -32,12 +32,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
-  run: |
-    pip install -r requirements.txt
-    pip install pytest psycopg2 pytest-cov coverage pylint
+        run: |
+          pip install -r requirements.txt
+          pip install pytest psycopg2 pytest-cov coverage pylint
 
       - name: Seed database
         run: |
@@ -54,7 +54,12 @@ jobs:
           PGPASSWORD: 2511ma!
           PGDATABASE: trustlayer_test
 
-       - name: Commit badge
+      - name: Generate coverage badge
+        uses: tj-actions/coverage-badge-py@v2
+        with:
+          output: coverage-badge.svg
+
+      - name: Commit badge
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
