@@ -54,7 +54,7 @@ jobs:
           PGPASSWORD: 2511ma!
           PGDATABASE: trustlayer_test
 
-           - name: Commit badge
+       - name: Commit badge
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
