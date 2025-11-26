@@ -1,5 +1,3 @@
-# Trigger pipeline run manually
-
 name: CI Pipeline
 
 on:
@@ -39,13 +37,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest psycopg2 pytest-cov coverage
+          pip install pytest psycopg2 pytest-cov coverage pylint
 
-     - name: Seed database
-  run: |
-    psql -h 127.0.0.1 -U postgres -d trustlayer_test -f seed.sql
-  env:
-    PGPASSWORD: 2511ma!
+      - name: Seed database
+        run: |
+          psql -h 127.0.0.1 -U postgres -d trustlayer_test -f seed.sql
+        env:
+          PGPASSWORD: 2511ma!
 
       - name: Run tests with coverage
         run: pytest --cov=backend --cov-report=xml --cov-report=term
