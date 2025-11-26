@@ -41,12 +41,13 @@ jobs:
 
       - name: Seed database
         run: |
+          sleep 10
           psql -h 127.0.0.1 -U postgres -d trustlayer_test -f seed.sql
         env:
           PGPASSWORD: 2511ma!
 
       - name: Run tests with coverage
-        run: pytest --cov=backend --cov-report=xml --cov-report=term
+        run: pytest --cov=. --cov-report=xml --cov-report=term
         env:
           PGHOST: 127.0.0.1
           PGUSER: postgres
@@ -61,10 +62,4 @@ jobs:
         with:
           output: coverage-badge.svg
 
-      - name: Commit badge
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add coverage-badge.svg
-          git commit -m "Update coverage badge" || echo "No changes to commit"
-          git push
+     
